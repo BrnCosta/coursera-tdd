@@ -15,4 +15,15 @@ public class TestCamelCase {
         assertEquals(1, result.size());
         assertEquals("", first);
     }
+
+    @Test
+    public void onlyOneWord() {
+        String expected = "test";
+
+        List<String> result = CamelCase.converterCamelCase(expected);
+        String first = CamelCase.getIndex(result, 0);
+
+        assertEquals(1, result.size());
+        assertEquals(expected, first);
+    }
 }
