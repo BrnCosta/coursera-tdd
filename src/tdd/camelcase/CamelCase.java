@@ -4,10 +4,10 @@ import java.util.*;
 
 public class CamelCase {
     public static List<String> converterCamelCase(String original) {
-        return Arrays.asList("");
+        return Arrays.asList(original);
     }
 
     public static String getIndex(List<String> stringList, int index) {
-        return "";
+        return stringList.get(0);
     }
 }
