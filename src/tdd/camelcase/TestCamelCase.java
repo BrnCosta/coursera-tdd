@@ -37,4 +37,13 @@ public class TestCamelCase {
         assertEquals("camel", first);
         assertEquals("case", second);
     }
+
+    @Test
+    public void wordOnlyUpperCase() {
+        List<String> result = CamelCase.converterCamelCase("TESTE");
+        String primeiro = CamelCase.getIndex(result, 0);
+
+        assertEquals(1, result.size());
+        assertEquals("TESTE", primeiro);
+    }
 }
