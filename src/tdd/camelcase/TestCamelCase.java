@@ -40,23 +40,32 @@ public class TestCamelCase {
 
     @Test
     public void wordOnlyUpperCase() {
-        List<String> result = CamelCase.converterCamelCase("TESTE");
-        String primeiro = CamelCase.getIndex(result, 0);
+        List<String> result = CamelCase.converterCamelCase("TEST");
+        String first = CamelCase.getIndex(result, 0);
 
         assertEquals(1, result.size());
-        assertEquals("TESTE", primeiro);
+        assertEquals("TEST", first);
     }
 
     @Test
-    public void camelCaseComUpperCase() {
-        List<String> result = CamelCase.converterCamelCase("camelTESTECase");
+    public void camelCaseWithUpperCase() {
+        List<String> result = CamelCase.converterCamelCase("camelTESTCase");
         String primeiro = CamelCase.getIndex(result, 0);
-        String segundo = CamelCase.getIndex(result, 1);
-        String terceiro = CamelCase.getIndex(result, 2);
+        String second = CamelCase.getIndex(result, 1);
+        String third = CamelCase.getIndex(result, 2);
 
         assertEquals(3, result.size());
         assertEquals("camel", primeiro);
-        assertEquals("TESTE", segundo);
-        assertEquals("case", terceiro);
+        assertEquals("TEST", second);
+        assertEquals("case", third);
+    }
+
+    @Test
+    public void startsWithNumber() {
+        try {
+            CamelCase.converterCamelCase("10CamelCase");
+            fail("Method is running with number at the beginning.");
+        } catch (Exception e) {
+        }
     }
 }

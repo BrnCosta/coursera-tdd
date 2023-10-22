@@ -4,17 +4,17 @@ import java.util.*;
 
 public class CamelCase {
 
-    public static List<String> converterCamelCase(String camelCaseString) {
+    public static List<String> converterCamelCase(String original) {
         List<String> result = new ArrayList<String>(Arrays.asList(""));
         int wordIndex = 0;
 
-        for (int i = 0; i < camelCaseString.length(); i++) {
-            char letter = camelCaseString.charAt(i);
+        for (int i = 0; i < original.length(); i++) {
+            char letter = original.charAt(i);
             boolean isNewWord = true;
 
             if (Character.isUpperCase(letter)) {
-                if (nextLetterUpper(camelCaseString, i))
-                    isNewWord = !previousLetterUpper(camelCaseString, i) && i != 0;
+                if (nextLetterUpper(original, i))
+                    isNewWord = !previousLetterUpper(original, i) && i != 0;
                 else
                     letter = Character.toLowerCase(letter);
 
