@@ -26,4 +26,15 @@ public class TestCamelCase {
         assertEquals(1, result.size());
         assertEquals(expected, first);
     }
+
+    @Test
+    public void twoWords() {
+        List<String> result = CamelCase.converterCamelCase("camelCase");
+        String first = CamelCase.getIndex(result, 0);
+        String second = CamelCase.getIndex(result, 1);
+
+        assertEquals(2, result.size());
+        assertEquals("camel", first);
+        assertEquals("case", second);
+    }
 }
