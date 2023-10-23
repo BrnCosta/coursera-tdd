@@ -12,6 +12,9 @@ public class CamelCase {
             char letter = original.charAt(i);
             boolean isNewWord = true;
 
+            if (Character.isDigit(letter))
+                throw new CamelCaseException("converterCamelCase cannot start with a number");
+
             if (Character.isUpperCase(letter)) {
                 if (nextLetterUpper(original, i))
                     isNewWord = !previousLetterUpper(original, i) && i != 0;

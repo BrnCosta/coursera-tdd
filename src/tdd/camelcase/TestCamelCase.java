@@ -60,12 +60,8 @@ public class TestCamelCase {
         assertEquals("case", third);
     }
 
-    @Test
+    @Test(expected = CamelCaseException.class)
     public void startsWithNumber() {
-        try {
-            CamelCase.converterCamelCase("10CamelCase");
-            fail("Method is running with number at the beginning.");
-        } catch (Exception e) {
-        }
+        CamelCase.converterCamelCase("10CamelCase");
     }
 }
