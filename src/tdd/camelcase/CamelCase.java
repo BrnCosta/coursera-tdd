@@ -7,44 +7,56 @@ public class CamelCase {
 
     public static List<String> converterCamelCase(String original) {
         List<String> result = new ArrayList<String>(Arrays.asList(""));
-        int wordIndex = 0;
 
-        Pattern my_pattern = Pattern.compile("[^a-z0-9 ]", Pattern.CASE_INSENSITIVE);
-        Matcher my_match = my_pattern.matcher(original);
-        boolean hasSpecial = my_match.find();
-
-        if (hasSpecial)
-            throw new CamelCaseException("converterCamelCase cannot contain a special character");
+        verifySpecialCharacter(original);
 
         for (int i = 0; i < original.length(); i++) {
-            char letter = original.charAt(i);
-            boolean isNewWord = false;
-
-            if (Character.isDigit(letter)) {
-                if (i == 0)
-                    throw new CamelCaseException("converterCamelCase cannot start with a number");
-
-                isNewWord = !previousLetterDigit(original, i);
-            }
-
-            if (Character.isUpperCase(letter)) {
-                isNewWord = true;
-                if (nextLetterUpper(original, i))
-                    isNewWord = !previousLetterUpper(original, i) && i != 0;
-                else
-                    letter = Character.toLowerCase(letter);
-            }
-
-            if (isNewWord) {
-                wordIndex++;
+            if (checkNewWord(original, i))
                 result.add("");
-            }
 
-            String word = result.get(wordIndex) + letter;
-            result.set(wordIndex, word);
+            char letter = verifyLetterUpperCase(original, i);
+
+            String word = result.get(result.size() - 1) + letter;
+            result.set(result.size() - 1, word);
         }
 
         return result;
+    }
+
+    private static void verifySpecialCharacter(String original) {
+        Pattern specialCharRegex = Pattern.compile("[^a-z0-9 ]", Pattern.CASE_INSENSITIVE);
+        Matcher originalMatch = specialCharRegex.matcher(original);
+
+        if (originalMatch.find())
+            throw new CamelCaseException("converterCamelCase cannot contain a special character");
+    }
+
+    private static char verifyLetterUpperCase(String original, int index) {
+        char letter = original.charAt(index);
+
+        if (!nextLetterUpper(original, index))
+            return Character.toLowerCase(letter);
+
+        return letter;
+    }
+
+    private static boolean checkNewWord(String original, int index) {
+        char letter = original.charAt(index);
+
+        if (Character.isDigit(letter)) {
+            if (index == 0)
+                throw new CamelCaseException("converterCamelCase cannot start with a number");
+
+            return !previousLetterDigit(original, index);
+        }
+
+        if (Character.isUpperCase(letter)) {
+            if (!previousLetterUpper(original, index))
+                return index != 0;
+            else
+                return !nextLetterUpper(original, index) && index != 0;
+        }
+        return false;
     }
 
     private static boolean nextLetterUpper(String camelString, int index) {

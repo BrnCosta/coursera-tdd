@@ -29,9 +29,9 @@ public class TestCamelCase {
 
     @Test
     public void oneWordWithUpper() {
-        String expected = "Test";
+        String expected = "test";
 
-        List<String> result = CamelCase.converterCamelCase(expected);
+        List<String> result = CamelCase.converterCamelCase("Test");
         String first = CamelCase.getIndex(result, 0);
 
         assertEquals(1, result.size());
