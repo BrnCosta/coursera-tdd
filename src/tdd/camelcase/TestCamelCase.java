@@ -43,6 +43,15 @@ public class TestCamelCase {
     }
 
     @Test
+    public void twoWordsWithFirstUpperCase() {
+        List<String> result = CamelCase.converterCamelCase("CamelCase");
+
+        assertEquals(2, result.size());
+        assertEquals("camel", CamelCase.getIndex(result, 0));
+        assertEquals("case", CamelCase.getIndex(result, 1));
+    }
+
+    @Test
     public void wordOnlyUpperCase() {
         List<String> result = CamelCase.converterCamelCase("TEST");
 
