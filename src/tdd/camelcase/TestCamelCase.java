@@ -10,65 +10,54 @@ public class TestCamelCase {
     @Test
     public void emptyString() {
         List<String> result = CamelCase.converterCamelCase("");
-        String first = CamelCase.getIndex(result, 0);
 
         assertEquals(1, result.size());
-        assertEquals("", first);
+        assertEquals("", CamelCase.getIndex(result, 0));
     }
 
     @Test
     public void onlyOneWord() {
         String expected = "test";
-
         List<String> result = CamelCase.converterCamelCase(expected);
-        String first = CamelCase.getIndex(result, 0);
 
         assertEquals(1, result.size());
-        assertEquals(expected, first);
+        assertEquals(expected, CamelCase.getIndex(result, 0));
     }
 
     @Test
     public void oneWordWithUpper() {
         String expected = "test";
-
         List<String> result = CamelCase.converterCamelCase("Test");
-        String first = CamelCase.getIndex(result, 0);
 
         assertEquals(1, result.size());
-        assertEquals(expected, first);
+        assertEquals(expected, CamelCase.getIndex(result, 0));
     }
 
     @Test
     public void twoWords() {
         List<String> result = CamelCase.converterCamelCase("camelCase");
-        String first = CamelCase.getIndex(result, 0);
-        String second = CamelCase.getIndex(result, 1);
 
         assertEquals(2, result.size());
-        assertEquals("camel", first);
-        assertEquals("case", second);
+        assertEquals("camel", CamelCase.getIndex(result, 0));
+        assertEquals("case", CamelCase.getIndex(result, 1));
     }
 
     @Test
     public void wordOnlyUpperCase() {
         List<String> result = CamelCase.converterCamelCase("TEST");
-        String first = CamelCase.getIndex(result, 0);
 
         assertEquals(1, result.size());
-        assertEquals("TEST", first);
+        assertEquals("TEST", CamelCase.getIndex(result, 0));
     }
 
     @Test
     public void camelCaseWithUpperCase() {
         List<String> result = CamelCase.converterCamelCase("camelTESTCase");
-        String primeiro = CamelCase.getIndex(result, 0);
-        String second = CamelCase.getIndex(result, 1);
-        String third = CamelCase.getIndex(result, 2);
 
         assertEquals(3, result.size());
-        assertEquals("camel", primeiro);
-        assertEquals("TEST", second);
-        assertEquals("case", third);
+        assertEquals("camel", CamelCase.getIndex(result, 0));
+        assertEquals("TEST", CamelCase.getIndex(result, 1));
+        assertEquals("case", CamelCase.getIndex(result, 2));
     }
 
     @Test(expected = CamelCaseException.class)
@@ -84,14 +73,11 @@ public class TestCamelCase {
     @Test
     public void camelCaseWithNumber() {
         List<String> result = CamelCase.converterCamelCase("camel10Case");
-        String primeiro = CamelCase.getIndex(result, 0);
-        String second = CamelCase.getIndex(result, 1);
-        String third = CamelCase.getIndex(result, 2);
 
         assertEquals(3, result.size());
-        assertEquals("camel", primeiro);
-        assertEquals("10", second);
-        assertEquals("case", third);
+        assertEquals("camel", CamelCase.getIndex(result, 0));
+        assertEquals("10", CamelCase.getIndex(result, 1));
+        assertEquals("case", CamelCase.getIndex(result, 2));
     }
 
     @Test

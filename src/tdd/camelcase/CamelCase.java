@@ -41,16 +41,14 @@ public class CamelCase {
     }
 
     private static boolean checkNewWord(String original, int index) {
-        char letter = original.charAt(index);
-
-        if (Character.isDigit(letter)) {
+        if (Character.isDigit(original.charAt(index))) {
             if (index == 0)
                 throw new CamelCaseException("converterCamelCase cannot start with a number");
 
             return !previousLetterDigit(original, index);
         }
 
-        if (Character.isUpperCase(letter)) {
+        if (Character.isUpperCase(original.charAt(index))) {
             if (!previousLetterUpper(original, index))
                 return index != 0;
             else
@@ -71,13 +69,13 @@ public class CamelCase {
         if (index - 1 < 0)
             return true;
 
-        char nextLetter = camelString.charAt(index - 1);
-        return Character.isUpperCase(nextLetter);
+        char previousLetter = camelString.charAt(index - 1);
+        return Character.isUpperCase(previousLetter);
     }
 
     private static boolean previousLetterDigit(String camelString, int index) {
-        char nextLetter = camelString.charAt(index - 1);
-        return Character.isDigit(nextLetter);
+        char previousLetter = camelString.charAt(index - 1);
+        return Character.isDigit(previousLetter);
     }
 
     public static String getIndex(List<String> stringList, int index) {
